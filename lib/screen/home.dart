@@ -3,23 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../sorts/sorts.dart';
 
-List<int> numArray = [4, 6, 2, 0, 7, 9, 8];
+List<int> numArray = [4, 6, 3, 0, 7, 9, 8];
 List<AlgorithmModel> _sortedAlgoritms = [
-  InsertionSort(
-    name: 'Insertion Sort',
-    type: SortAlgorithms.insertion,
-    timeComplexity: 'O(n*2)'
-  ),
-  BubbleSort(
-    name: 'Bubble Sort',
-    type: SortAlgorithms.bubble,
-    timeComplexity: 'O(n*2)'
-  ),
-  SelectionSort(
-    name: 'Selection Sort',
-    type: SortAlgorithms.selection,
-    timeComplexity: 'O(n*2)'
-  ),
+  InsertionSort(),
+  BubbleSort(),
+  SelectionSort(),
+  HeapSort()
 ];
 
 class HomeScreen extends StatefulWidget {
@@ -84,16 +73,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 : SizedBox(),
             SizedBox(height: 50.0),
             Flexible(
-                child: Container(
-              height: 70.0,
-              child: ListView.builder(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: 35.0,
+                  maxHeight: 70.0,
+                ),
+                child: ListView.builder(
                   itemExtent: 150.0,
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount: _sortedAlgoritms.length,
-                  itemBuilder: (_, int index) =>
-                      _buildAlgorithmItem(_sortedAlgoritms[index])),
-            )),
+                  itemBuilder: (_, int index) => _buildAlgorithmItem(_sortedAlgoritms[index])
+                ),
+              )
+            ),
             SizedBox(height: 15.0),
           ],
         ),
@@ -102,11 +95,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildAlgorithmItem(AlgorithmModel item) {
-
     return Container(
       margin: EdgeInsets.all(10.0),
       child: RaisedButton(
-          color: selectedAlgorithm != null && selectedAlgorithm.type == item.type ? Theme.of(context).primaryColor : Theme.of(context).accentColor,
+          color: selectedAlgorithm != null && selectedAlgorithm.type == item.type ? 
+          Theme.of(context).primaryColor : Theme.of(context).accentColor,
           onPressed: () => _onItemPressed(item),
           child: Text(
             item.name,
@@ -120,10 +113,10 @@ class _HomeScreenState extends State<HomeScreen> {
     List<int> arr = [
       ...numArray
     ]; // it create a copy of items with diff refrence
-    setState(() {
-      result = '---';
-      timeComplexity = '---';
-    });
+    // setState(() {
+    //   result = '---';
+    //   timeComplexity = '---';
+    // });
 
     // Timer.periodic(new Duration(seconds: 1), (timer) {
         setState(() {

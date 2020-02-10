@@ -5,8 +5,11 @@ class SelectionSort extends AlgorithmModel {
   SortAlgorithms type;
   String timeComplexity;
 
-  SelectionSort({this.name, this.type, this.timeComplexity})
-      : super(name: name, type: type, timeComplexity: timeComplexity);
+  SelectionSort({ 
+    this.name: 'Selection Sort', 
+    this.type: SortAlgorithms.selection, 
+    this.timeComplexity: 'O(n*2)' 
+  }): super(name: name, type: type, timeComplexity: timeComplexity);
 
   @override
   String sort(List arr) {

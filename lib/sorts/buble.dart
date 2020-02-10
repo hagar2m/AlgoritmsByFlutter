@@ -5,8 +5,11 @@ class BubbleSort extends AlgorithmModel {
   SortAlgorithms type;
   String timeComplexity;
 
-  BubbleSort({this.name, this.type, this.timeComplexity})
-      : super(name: name, type: type, timeComplexity: timeComplexity);
+  BubbleSort({
+    this.name: 'Bubble Sort', 
+    this.type: SortAlgorithms.bubble, 
+    this.timeComplexity: 'O(n*2)'
+  }): super(name: name, type: type, timeComplexity: timeComplexity);
 
   @override
   String sort(List arr) {

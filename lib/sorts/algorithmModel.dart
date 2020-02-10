@@ -11,4 +11,5 @@ enum SortAlgorithms {
   insertion,
   bubble,
   selection, 
+  heap
 }
