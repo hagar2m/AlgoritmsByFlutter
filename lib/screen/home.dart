@@ -1,22 +1,23 @@
-import 'dart:async';
 import 'dart:math';
-
-import 'package:algorithms_emplement/sorts/buble.dart';
 import 'package:flutter/material.dart';
 
-import '../sorts/insertion .dart';
-import '../models/algorithmModel.dart';
+import '../sorts/sorts.dart';
 
-List<int> numArray = [4, 6, 2, 0, 7, 9, 6];
+List<int> numArray = [4, 6, 2, 0, 7, 9, 8];
 List<AlgorithmModel> _sortedAlgoritms = [
-  AlgorithmModel(
+  InsertionSort(
     name: 'Insertion Sort',
     type: SortAlgorithms.insertion,
     timeComplexity: 'O(n*2)'
   ),
-  AlgorithmModel(
+  BubbleSort(
     name: 'Bubble Sort',
     type: SortAlgorithms.bubble,
+    timeComplexity: 'O(n*2)'
+  ),
+  SelectionSort(
+    name: 'Selection Sort',
+    type: SortAlgorithms.selection,
     timeComplexity: 'O(n*2)'
   ),
 ];
@@ -29,6 +30,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String result;
   String timeComplexity;
+  AlgorithmModel selectedAlgorithm;
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 : SizedBox(),
             SizedBox(height: 25.0),
-            result != null
+            selectedAlgorithm != null
                 ? Text(
-                    'TimeComplexity:  $timeComplexity',
+                    'TimeComplexity:  ${selectedAlgorithm.timeComplexity}',
                     style: Theme.of(context).textTheme.display1.copyWith(
                           color: Theme.of(context).primaryColor,
                         ),
@@ -87,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView.builder(
                   itemExtent: 150.0,
                   scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
                   itemCount: _sortedAlgoritms.length,
                   itemBuilder: (_, int index) =>
                       _buildAlgorithmItem(_sortedAlgoritms[index])),
@@ -99,10 +102,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildAlgorithmItem(AlgorithmModel item) {
+
     return Container(
       margin: EdgeInsets.all(10.0),
       child: RaisedButton(
-          color: Theme.of(context).accentColor,
+          color: selectedAlgorithm != null && selectedAlgorithm.type == item.type ? Theme.of(context).primaryColor : Theme.of(context).accentColor,
           onPressed: () => _onItemPressed(item),
           child: Text(
             item.name,
@@ -121,18 +125,11 @@ class _HomeScreenState extends State<HomeScreen> {
       timeComplexity = '---';
     });
 
-    Timer.periodic(new Duration(seconds: 1), (timer) {
-      if (item.type == SortAlgorithms.insertion) {
+    // Timer.periodic(new Duration(seconds: 1), (timer) {
         setState(() {
-          result = InsertionSort.sort(arr);
-          timeComplexity = item.timeComplexity;
+          result = item.sort(arr);
+          selectedAlgorithm = item;
         });
-      } else if (item.type == SortAlgorithms.bubble) {
-        setState(() {
-          result = BubbleSort.sort(arr);
-          timeComplexity = item.timeComplexity;
-        });
-      }
-    });
+    // });
   }
 }

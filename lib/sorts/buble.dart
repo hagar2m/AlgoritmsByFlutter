@@ -1,7 +1,15 @@
-import 'sortingAlgorithm.dart';
+import './algorithmModel.dart';
 
-class BubbleSort extends SortingAlgorithm {
-  static String sort(List arr) {
+class BubbleSort extends AlgorithmModel {
+  String name;
+  SortAlgorithms type;
+  String timeComplexity;
+
+  BubbleSort({this.name, this.type, this.timeComplexity})
+      : super(name: name, type: type, timeComplexity: timeComplexity);
+
+  @override
+  String sort(List arr) {
     int n = arr.length;
 
     for (var i = 0; i < n - 1; i++) {
@@ -15,8 +23,7 @@ class BubbleSort extends SortingAlgorithm {
         }
       }
 
-      if (swap ==  false) 
-        break;
+      if (swap == false) break;
     }
     return arr.toString();
   }
