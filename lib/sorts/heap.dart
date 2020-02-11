@@ -86,14 +86,15 @@ class HeapSort extends AlgorithmModel {
   String name;
   SortAlgorithms type;
   String timeComplexity;
+  bool sortingInPlace;
 
   HeapSort({
     this.name: 'Heap Sort',
     this.type: SortAlgorithms.heap,
-    this.timeComplexity:
-        'O(nLogn)' // length of tree  = log n & evry item I make heapify so => n Log n
+    this.timeComplexity: 'O(nLogn)', // length of tree  = log n & evry item I make heapify so => n Log n
+    this.sortingInPlace: true
     })
-    : super(name: name, type: type, timeComplexity: timeComplexity);
+    : super(name: name, type: type, timeComplexity: timeComplexity, sortingInPlace: sortingInPlace);
 
   @override
   String sort(List arr) {

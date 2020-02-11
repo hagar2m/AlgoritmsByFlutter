@@ -4,12 +4,14 @@ class SelectionSort extends AlgorithmModel {
   String name;
   SortAlgorithms type;
   String timeComplexity;
+  bool sortingInPlace;
 
   SelectionSort({ 
     this.name: 'Selection Sort', 
     this.type: SortAlgorithms.selection, 
-    this.timeComplexity: 'O(n*2)' 
-  }): super(name: name, type: type, timeComplexity: timeComplexity);
+    this.timeComplexity: 'O(n*2)',
+    this.sortingInPlace: true //  it does not require extra space.
+  }): super(name: name, type: type, timeComplexity: timeComplexity, sortingInPlace: sortingInPlace);
 
   @override
   String sort(List arr) {
